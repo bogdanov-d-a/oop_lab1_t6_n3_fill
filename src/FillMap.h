@@ -4,7 +4,7 @@ class CFillMap
 {
 public:
 	typedef int8_t index_t;
-	enum class value_t { EMPTY = ' ', WALL = '#', SOURCE = 'O', FULL = '.' };
+	enum class value_t { EMPTY = ' ', WALL = '#', SOURCE = 'O', FULL = '.', USED_SOURCE = '!' };
 
 	typedef struct coord_struct
 	{

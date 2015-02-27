@@ -97,6 +97,11 @@ void CFillMap::FillMap()
 				m_data[tmpCoord.row][tmpCoord.column] = value_t::FULL;
 			}
 
+			if (m_data[tmpCoord.row][tmpCoord.column] == value_t::SOURCE)
+			{
+				m_data[tmpCoord.row][tmpCoord.column] = value_t::USED_SOURCE;
+			}
+
 			m_fillBuffer.push({ tmpCoord.row - 1, tmpCoord.column });
 			m_fillBuffer.push({ tmpCoord.row + 1, tmpCoord.column });
 			m_fillBuffer.push({ tmpCoord.row, tmpCoord.column - 1 });
@@ -123,7 +128,14 @@ void CFillMap::PrintRow(index_t row, FILE *outFile)
 
 	for (index_t column = 0; column < lineLength; ++column)
 	{
-		putc(static_cast<char>(m_data[row][column]), outFile);
+		if (m_data[row][column] == value_t::USED_SOURCE)
+		{
+			putc(static_cast<char>(value_t::SOURCE), outFile);
+		}
+		else
+		{
+			putc(static_cast<char>(m_data[row][column]), outFile);
+		}
 	}
 
 	putc('\n', outFile);
